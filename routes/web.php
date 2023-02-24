@@ -51,3 +51,8 @@ Route::resource('products',ProductController::class);
 Route::resource('orders',OrderController::class);
 Route::resource('orderitems',OrderItemController::class);
 
+Route::get('/child', function(){
+    return view('child');
+
+});
+

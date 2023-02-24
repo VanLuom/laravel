@@ -14,8 +14,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
-        return User::all();
+         $users = User::all();
+        $strHML = '';
+        foreach($users as $person){
+            $strHML = $strHML .'<br>'. $person->name. '<br>';
+        }
+        return $strHML;
     }
 
     /**
@@ -37,7 +41,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
-        return User::create($request->all());
+      
     }
 
     /**
@@ -61,6 +65,7 @@ class UserController extends Controller
     public function edit($id)
     {
         //
+
     }
 
     /**
@@ -73,7 +78,9 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
+        
     }
+
 
     /**
      * Remove the specified resource from storage.

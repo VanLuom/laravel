@@ -15,7 +15,12 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        return Category::all();
+        $category = Category::all();
+        $strHML = '';
+        foreach($category as $person){
+            $strHML = $strHML .'<br>'. $person->desc. '<br>';
+        }
+        return $strHML;
     }
 
     /**
@@ -26,6 +31,7 @@ class CategoryController extends Controller
     public function create()
     {
         //
+
       
     }
 

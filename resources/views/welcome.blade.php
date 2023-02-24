@@ -21,10 +21,6 @@
         </style>
     </head>
     <body class="antialiased">
-        <form action="/put" method="post">
-            {{ csrf_field() }}
-            {{ method_field('PUT') }}
-            <button type="submit">submit</button>
-        </form>
+       
     </body>
 </html>
