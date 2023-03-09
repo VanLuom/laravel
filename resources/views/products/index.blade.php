@@ -1,7 +1,6 @@
+
 @extends('layout')
-
 @section('title', 'List Product')
-
 @section('content')
 <div class="bg0 m-t-23 p-b-140">
     <div class="container">
@@ -255,7 +254,7 @@
                     <div class="block2-pic hov-img0">
                         <img src="{{url($product->img)}}" alt="IMG-PRODUCT">
 
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                        <a href="" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                             Quick View
                         </a>
                     </div>

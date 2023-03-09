@@ -33,7 +33,7 @@
 
                 <!-- Logo desktop -->
                 <a href="#" class="logo">
-                    <img src="images/icons/logo-01.png" alt="IMG-LOGO">
+                    <img src="" alt="IMG-LOGO">
                 </a>
 
                 <!-- Menu desktop -->
@@ -84,6 +84,14 @@
                     <a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
                         data-notify="0">
                         <i class="zmdi zmdi-favorite-outline"></i>
+                       
+                    </a>
+                    <a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-user"
+                    data-notify="0">
+                    <li>
+                    <i class="fa-solid fa-user">
+                    </i>
+                    </li>
                     </a>
                 </div>
             </nav>
@@ -94,7 +102,7 @@
     <div class="wrap-header-mobile">
         <!-- Logo moblie -->
         <div class="logo-mobile">
-            <a href="index.html"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
+            <a href="index.html"><img src="" alt="IMG-LOGO"></a>
         </div>
 
         <!-- Icon header -->

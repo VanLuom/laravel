@@ -14,13 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
-        $category = Category::all();
-        $strHML = '';
-        foreach($category as $person){
-            $strHML = $strHML .'<br>'. $person->desc. '<br>';
-        }
-        return $strHML;
+        $categoryList = Category::all();
+        return view('inc.banner', ['categoryList' => $categoryList]);
     }
 
     /**

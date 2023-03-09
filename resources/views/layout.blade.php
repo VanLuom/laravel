@@ -29,6 +29,9 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{{ url('css/util.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('css/main.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <!--===============================================================================================-->
 </head>
 
@@ -36,14 +39,23 @@
 
     <!-- Header -->
     @include('inc.header')
+    <!-- Slider -->
+    @include('inc.slide')
+    <!-- Banner -->
+    @include('inc.banner')
     <!-- Cart -->
     @yield('content')
 
-    <!-- breadcrumb -->
 
 
 
-    <!-- Shoping Cart -->
+
+
+
+
+
+
+
 
 
 
@@ -52,14 +64,14 @@
     @include('inc.footer')
 
     <!--===============================================================================================-->
-    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="{{ url('vendor/jquery/jquery-3.2.1.min.js') }}"></script>
     <!--===============================================================================================-->
-    <script src="vendor/animsition/js/animsition.min.js"></script>
+    <script src="{{ url('vendor/animsition/js/animsition.min.js') }}"></script>
     <!--===============================================================================================-->
-    <script src="vendor/bootstrap/js/popper.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="{{ url('vendor/bootstrap/js/popper.js') }}"></script>
+    <script src="{{ url('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
     <!--===============================================================================================-->
-    <script src="vendor/select2/select2.min.js"></script>
+    <script src="{{ url('vendor/select2/select2.min.js') }}"></script>
     <script>
         $(".js-select2").each(function() {
             $(this).select2({
@@ -69,9 +81,16 @@
         })
     </script>
     <!--===============================================================================================-->
-    <script src="vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+    <script src="{{ url('vendor/MagnificPopup/jquery.magnific-popup.min.js') }}"></script>
     <!--===============================================================================================-->
-    <script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="{{ url('vendor/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+    </script>
     <script>
         $('.js-pscroll').each(function() {
             $(this).css('position', 'relative');
@@ -88,11 +107,10 @@
         });
     </script>
     <!--===============================================================================================-->
-    <script src="js/main.js"></script>
+    <script src="{{ url('js/main.js') }}"></script>
 
 </body>
 
 </html>
-</body>
 
 </html>
