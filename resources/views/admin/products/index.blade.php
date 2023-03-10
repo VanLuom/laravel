@@ -24,7 +24,7 @@
                         </tr>
                     </thead>
                    
-                        @foreach($productList as $product)
+                        @foreach($cates as $product)
                         <tr>
                             <td>#</td>
                             <td>{{ $product->name }}</td>
@@ -33,14 +33,14 @@
                             <td>{{ $product->price }}</td>
                             <td>{{ $product->category_id }}</td>
                             <td>
-                                <a class="badge badge-danger" href="{{ route('admin.products.edit',$product->id) }}">Pending</a>
+                                <a class="badge badge-danger" href="{{ route('admin.products.edit',$product->id) }}">Edit</a>
                             </td>
 
                             <td>
                                 <form action="{{ route('admin.products.destroy',$product->id) }}" method="post">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
-                                    <button type="submit">Delete</button>
+                                    <button onclick="return confirm('Bạn có Muốn xóa không')">Delete</button>
                                 </form>
                             </td>
                         </tr>

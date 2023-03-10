@@ -16,8 +16,11 @@ class UserController extends Controller
     public function index()
     {
         //
-        $userList = User::all();
-        return view('admin.users.index', ['userList' => $userList]);
+       
+
+
+        $cates =User::orderby('id','desc')->get();
+        return view('admin.users.index')->with(compact('cates'));
     }
 
     /**
@@ -41,12 +44,32 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
-        $user = User::create($request->only(['name', 'email', 'password']));
-        $message = "Seccess full Created";
-        if($user == null){
-            $message = "Seccess full failed";
-        }
-        return redirect()->route('admin.users.index')->with('message', $message);
+        // $user = User::create($request->only(['name', 'email', 'password']));
+        // $message = "Seccess full Created";
+        // if($user == null){
+        //     $message = "Seccess full failed";
+        // }
+        $data = $request->validate(
+            [
+                'name' => 'required|unique:categories|max:225',
+                'email' =>'required',
+                'password'=>'required'
+            ],
+            [
+                'name.required' => 'Nhập Tiêu đề',
+                'name.unique' => 'Tiêu đề này đã tồn tại, Nhập tiêu đề khác',
+                'email.required' => 'Nhập email',
+                'password.required' => 'Nhập password',
+
+
+            ]
+            );
+            $cate = new User;
+            $cate ->name = $data['name'];
+            $cate->email = $data['email'];
+            $cate->password = $data['password'];
+            $cate->save();
+        return redirect()->route('admin.users.index')->with('status', 'Thêm Danh mục thành công');
     }
 
     /**

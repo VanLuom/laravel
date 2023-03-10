@@ -16,8 +16,11 @@ class ProductController extends Controller
     public function index()
     {
         //
-        $productList = Product::all();
-        return view('admin.products.index', ['productList' => $productList]);
+       
+
+
+        $cates =Product::orderby('id','desc')->get();
+        return view('admin.products.index')->with(compact('cates'));
     }
 
     /**
@@ -40,12 +43,36 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
-        $product = Product::create($request->only(['name', 'img', 'desc','price','category_id']));
-        $message = "Seccess full Created";
-        if($product == null){
-            $message = "Seccess full failed";
-        }
-        return redirect()->route('admin.products.index')->with('message', $message);
+        // $product = Product::create($request->only(['name', 'img', 'desc','price','category_id']));
+        // $message = "Seccess full Created";
+        // if($product == null){
+        //     $message = "Seccess full failed";
+        // }
+        $data = $request->validate(
+            [
+                'name' => 'required|unique:categories|max:225',
+                'desc' =>'required',
+                'img'=>'required',
+                'price'=>'required'
+            ],
+            [
+                'name.required' => 'Nhập Tiêu đề',
+                'name.unique' => 'Tiêu đề này đã tồn tại, Nhập tiêu đề khác',
+                'desc.required' => 'Nhập mô tả',
+                'img.required' => 'thêm ảnh',
+                'price.required' =>'Nhập giá'
+
+
+            ]
+            );
+            $cate = new Product;
+            $cate ->name = $data['name'];
+            $cate->desc = $data['desc'];
+            $cate->img = $data['img'];
+            $cate->price = $data['price'];
+            $cate->save();
+
+        return redirect()->route('admin.products.index')->with('status', 'Thêm danh mục thành công');
     }
 
     /**

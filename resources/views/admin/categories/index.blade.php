@@ -21,20 +21,20 @@
                         </tr>
                     </thead>
                     
-                        @foreach($categoryList as $category)
+                        @foreach($cates as $category)
                         <tr>
                             <td>#</td>
                             <td>{{ $category->name }}</td>
                             <td>{{ $category->email }}</td>
                             <td>
-                                <a class="badge badge-warning btn btn-warning" href="{{ route('admin.categories.edit',$category->id) }}">Pending</a>
+                                <a class="badge badge-warning btn btn-warning" href="{{ route('admin.categories.edit',$category->id) }}">Edit</a>
                             </td>
 
                             <td>
                                 <form action="{{ route('admin.categories.destroy',$category->id) }}" method="post">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
-                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                    <button class="btn btn-danger" onclick="return confirm('bạn muốn xóa không')" >Delete</button>
                                 </form>
                             </td>
                         </tr>

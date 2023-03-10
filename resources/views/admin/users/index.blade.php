@@ -21,21 +21,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($userList as $user)
+                            @foreach ($cates as $user)
                                 <tr>
                                     <td>#</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>
                                         <a class="badge badge-danger"
-                                            href="{{ route('admin.users.edit', $user->id) }}">Pending</a>
+                                            href="{{ route('admin.users.edit', $user->id) }}">Edit</a>
                                     </td>
 
                                     <td>
                                         <form action="{{ route('admin.users.destroy', $user->id) }}" method="post">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
-                                            <button type="submit">Delete</button>
+                                            <button onclick="return confirm('Bạn có muốn xóa không')">Delete</button>
                                         </form>
                                     </td>
                                 </tr>

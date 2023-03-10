@@ -16,10 +16,8 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $categoryList = Category::all();
-        return view('admin.categories.index', ['categoryList' => $categoryList]);
 
-        $cate =Category::orderby('id','desc')->get();
+        $cates =Category::orderby('desc')->get();
         return view('admin.categories.index')->with(compact('cates'));
     }
 
@@ -93,6 +91,9 @@ class CategoryController extends Controller
         //
         $category = Category::findOrFail($id);
         return view('admin.categories.edit', compact('category'));
+
+      
+
     }
 
     /**
@@ -129,9 +130,8 @@ class CategoryController extends Controller
         if (!Category::destroy($id)) {
             $message = "Seccess full failed";
         }
-        Category::find($id)->deleted();
-        return redirect()->route('categories.index')->with('status', 'Xóa danh mục thành công');
+       
 
-        return redirect()->route('admin.products.index')->with('message', $message);
+        return redirect()->route('admin.categories.index')->with('message', $message);
     }
 }
