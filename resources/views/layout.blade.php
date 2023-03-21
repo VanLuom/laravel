@@ -41,8 +41,7 @@
     @include('inc.header')
     <!-- Slider -->
     @include('inc.slide')
-    <!-- Banner -->
-    @include('inc.banner')
+
     <!-- Cart -->
     @yield('content')
 

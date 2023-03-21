@@ -18,6 +18,7 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
+        $index = 0;
         return [
             
             'img' => fake()->name(),

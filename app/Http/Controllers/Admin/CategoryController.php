@@ -17,7 +17,7 @@ class CategoryController extends Controller
     {
         //
 
-        $cates =Category::orderby('desc')->get();
+        $cates = Category::orderby('id', 'desc')->get();
         return view('admin.categories.index')->with(compact('cates'));
     }
 
@@ -42,31 +42,30 @@ class CategoryController extends Controller
     {
         //
         // $category = Category::create($request->only(['name','desc','img']));
-      
-        
+
+
         $data = $request->validate(
             [
                 'name' => 'required|unique:categories|max:225',
-                'desc' =>'required',
-                'img'=>'required'
+                'desc' => 'required',
+
             ],
             [
                 'name.required' => 'Nhập Tiêu đề',
                 'name.unique' => 'Tiêu đề này đã tồn tại, Nhập tiêu đề khác',
                 'desc.required' => 'Nhập mô tả',
-                'img.required' => 'thêm ảnh'
+
 
 
             ]
-            );
-            $cate = new Category;
-            $cate ->name = $data['name'];
-            $cate->desc = $data['desc'];
-            $cate->img = $data['img'];
-            $cate->save();
+        );
+        $cate = new Category;
+        $cate->name = $data['name'];
+        $cate->desc = $data['desc'];
 
-            return redirect()->route('admin.categories.index')->with('status', 'Thêm danh mục thành công');
+        $cate->save();
 
+        return redirect()->route('admin.categories.index')->with('status', 'Thêm danh mục thành công');
     }
 
     /**
@@ -91,9 +90,6 @@ class CategoryController extends Controller
         //
         $category = Category::findOrFail($id);
         return view('admin.categories.edit', compact('category'));
-
-      
-
     }
 
     /**
@@ -107,14 +103,12 @@ class CategoryController extends Controller
     {
         //
         $category = Category::findOrFail($id);
-        $bool = $category->update($request->only(['name','desc']));
+        $bool = $category->update($request->only(['name', 'desc']));
         $message = "Seccess full Created";
-        if(!$bool){
+        if (!$bool) {
             $message = "Success full failed";
-
         }
         return redirect()->route('admin.categories.index')->with('message', $message);
-       
     }
 
     /**
@@ -126,11 +120,10 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         //
-        $message = "Seccess full deleted";
+        $message = "xóa danh mục thành công";
         if (!Category::destroy($id)) {
-            $message = "Seccess full failed";
+            $message = "xóa thất bại";
         }
-       
 
         return redirect()->route('admin.categories.index')->with('message', $message);
     }

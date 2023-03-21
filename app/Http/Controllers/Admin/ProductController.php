@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -16,11 +17,8 @@ class ProductController extends Controller
     public function index()
     {
         //
-       
-
-
-        $cates =Product::orderby('id','desc')->get();
-        return view('admin.products.index')->with(compact('cates'));
+        $productList = Product::all();
+        return view('admin.products.index', ['productList' => $productList]);
     }
 
     /**
@@ -43,36 +41,13 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
-        // $product = Product::create($request->only(['name', 'img', 'desc','price','category_id']));
-        // $message = "Seccess full Created";
-        // if($product == null){
-        //     $message = "Seccess full failed";
-        // }
-        $data = $request->validate(
-            [
-                'name' => 'required|unique:categories|max:225',
-                'desc' =>'required',
-                'img'=>'required',
-                'price'=>'required'
-            ],
-            [
-                'name.required' => 'Nhập Tiêu đề',
-                'name.unique' => 'Tiêu đề này đã tồn tại, Nhập tiêu đề khác',
-                'desc.required' => 'Nhập mô tả',
-                'img.required' => 'thêm ảnh',
-                'price.required' =>'Nhập giá'
-
-
-            ]
-            );
-            $cate = new Product;
-            $cate ->name = $data['name'];
-            $cate->desc = $data['desc'];
-            $cate->img = $data['img'];
-            $cate->price = $data['price'];
-            $cate->save();
-
-        return redirect()->route('admin.products.index')->with('status', 'Thêm danh mục thành công');
+      
+        $product = Product::create($request->only(['name', 'img', 'desc','price','category_id']));
+        $message = "Seccess full Created";
+        if($product == null){
+            $message = "Seccess full failed";
+        }
+        return redirect()->route('admin.products.index')->with('message', $message);
     }
 
     /**
@@ -109,6 +84,7 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         //
+      
         $product = Product::findOrFail($id);
         $bool = $product->update($request->only(['name', 'img', 'desc','category_id','price']));
         $message = "Seccess full Created";

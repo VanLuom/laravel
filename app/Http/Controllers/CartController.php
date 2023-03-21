@@ -2,83 +2,61 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function addToCart(Request $request, $id)
     {
-        return view('cart.index');
+        $quantity = request()->input('quantity', 1);
+        $product = Product::find($id);
+
+        $cart = Order::where('user_id', auth()->user()->id)
+            ->where('product_id', $id)
+            ->first();
+
+        if ($cart) {
+            $cart->increment('quantity', $quantity);
+        } else {
+            Order::create([
+                'user_id' => auth()->user()->id,
+                'product_id' => $id,
+                'quantity' => $quantity,
+
+            ]);
+        }
+
+        return redirect()->route('cart')->with('success', 'Product added to cart successfully!');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function showCart()
     {
-        //
-    }
+        $carts = Order::where('user_id', auth()->user()->id)->get();
+        $total = $carts->sum(function ($cart) {
+            return $cart->product->price * $cart->quantity;
+        });
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        return view('cart.index', compact('carts', 'total'));
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'quantity' => 'required|numeric|min:1',
+        ]);
+
+        $cart = Order::findOrFail($id);
+        $cart->quantity = $request->quantity;
+        $cart->save();
+
+        return redirect()->route('cart')->with('success', 'Cập nhật giỏ hàng thành công');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $cart = Order::findOrFail($id);
+        $cart->delete();
+        return redirect()->back()->with('success', 'Sản phẩm đã được xóa khỏi giỏ hàng.');
     }
 }

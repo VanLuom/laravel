@@ -98,11 +98,11 @@
                                             <i class="fs-16 zmdi zmdi-plus"></i>
                                         </div>
                                     </div>
-                                    <a href="{{route('cart.index')}}">
-                                    <button
-                                        class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-                                        Add to cart
-                                    </button>
+                                    <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                                        @csrf
+                                        <input type="number" name="quantity" value="1" min="1">
+                                        <button type="submit" class="btn btn-primary">Add to Cart</button>
+                                    </form>
                                 </a>
                                 </div>
                             </div>

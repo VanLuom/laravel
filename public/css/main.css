@@ -3330,3 +3330,9 @@ input.num-product::-webkit-inner-spin-button {
   }
 
 }
+.form-control{
+  width: 10px;
+}
+.from-update{
+  width: 40px;
+}
